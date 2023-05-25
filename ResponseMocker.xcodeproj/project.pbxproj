@@ -11,8 +11,8 @@
 		521BA8612A1FE5EE002DE693 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521BA8602A1FE5EE002DE693 /* ContentView.swift */; };
 		521BA8632A1FE5EF002DE693 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 521BA8622A1FE5EF002DE693 /* Assets.xcassets */; };
 		521BA8662A1FE5F0002DE693 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 521BA8652A1FE5F0002DE693 /* Preview Assets.xcassets */; };
-		521BA86F2A1FE696002DE693 /* Vapor in Frameworks */ = {isa = PBXBuildFile; productRef = 521BA86E2A1FE696002DE693 /* Vapor */; };
 		521BA8712A1FE6B6002DE693 /* ServerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521BA8702A1FE6B6002DE693 /* ServerProvider.swift */; };
+		521BA8742A1FEF2A002DE693 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = 521BA8732A1FEF2A002DE693 /* Swifter */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				521BA86F2A1FE696002DE693 /* Vapor in Frameworks */,
+				521BA8742A1FEF2A002DE693 /* Swifter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,7 +91,7 @@
 			);
 			name = ResponseMocker;
 			packageProductDependencies = (
-				521BA86E2A1FE696002DE693 /* Vapor */,
+				521BA8732A1FEF2A002DE693 /* Swifter */,
 			);
 			productName = ResponseMocker;
 			productReference = 521BA85B2A1FE5EE002DE693 /* ResponseMocker.app */;
@@ -122,7 +122,7 @@
 			);
 			mainGroup = 521BA8522A1FE5EE002DE693;
 			packageReferences = (
-				521BA86D2A1FE696002DE693 /* XCRemoteSwiftPackageReference "vapor" */,
+				521BA8722A1FEF2A002DE693 /* XCRemoteSwiftPackageReference "swifter" */,
 			);
 			productRefGroup = 521BA85C2A1FE5EE002DE693 /* Products */;
 			projectDirPath = "";
@@ -350,21 +350,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		521BA86D2A1FE696002DE693 /* XCRemoteSwiftPackageReference "vapor" */ = {
+		521BA8722A1FEF2A002DE693 /* XCRemoteSwiftPackageReference "swifter" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/vapor/vapor.git";
+			repositoryURL = "https://github.com/httpswift/swifter.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		521BA86E2A1FE696002DE693 /* Vapor */ = {
+		521BA8732A1FEF2A002DE693 /* Swifter */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 521BA86D2A1FE696002DE693 /* XCRemoteSwiftPackageReference "vapor" */;
-			productName = Vapor;
+			package = 521BA8722A1FEF2A002DE693 /* XCRemoteSwiftPackageReference "swifter" */;
+			productName = Swifter;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

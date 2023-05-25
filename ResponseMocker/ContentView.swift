@@ -15,9 +15,17 @@ struct ContentView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text(serverProvider.isRunning ? "Running" : "Not running")
+            Button("Reboot") {
+                Task {
+                    await serverProvider.reboot()
+                }
+            }
         }
         .padding()
+        .onAppear {
+            serverProvider.start()
+        }
     }
 }
 
