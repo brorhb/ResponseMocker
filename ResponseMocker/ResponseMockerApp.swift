@@ -12,6 +12,7 @@ struct ResponseMockerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(ServerProvider())
         }
     }
 }

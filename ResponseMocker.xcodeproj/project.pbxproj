@@ -11,6 +11,8 @@
 		521BA8612A1FE5EE002DE693 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521BA8602A1FE5EE002DE693 /* ContentView.swift */; };
 		521BA8632A1FE5EF002DE693 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 521BA8622A1FE5EF002DE693 /* Assets.xcassets */; };
 		521BA8662A1FE5F0002DE693 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 521BA8652A1FE5F0002DE693 /* Preview Assets.xcassets */; };
+		521BA86F2A1FE696002DE693 /* Vapor in Frameworks */ = {isa = PBXBuildFile; productRef = 521BA86E2A1FE696002DE693 /* Vapor */; };
+		521BA8712A1FE6B6002DE693 /* ServerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521BA8702A1FE6B6002DE693 /* ServerProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,7 @@
 		521BA8622A1FE5EF002DE693 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		521BA8652A1FE5F0002DE693 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		521BA8672A1FE5F0002DE693 /* ResponseMocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ResponseMocker.entitlements; sourceTree = "<group>"; };
+		521BA8702A1FE6B6002DE693 /* ServerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				521BA86F2A1FE696002DE693 /* Vapor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +61,7 @@
 				521BA8622A1FE5EF002DE693 /* Assets.xcassets */,
 				521BA8672A1FE5F0002DE693 /* ResponseMocker.entitlements */,
 				521BA8642A1FE5F0002DE693 /* Preview Content */,
+				521BA8702A1FE6B6002DE693 /* ServerProvider.swift */,
 			);
 			path = ResponseMocker;
 			sourceTree = "<group>";
@@ -85,6 +90,9 @@
 			dependencies = (
 			);
 			name = ResponseMocker;
+			packageProductDependencies = (
+				521BA86E2A1FE696002DE693 /* Vapor */,
+			);
 			productName = ResponseMocker;
 			productReference = 521BA85B2A1FE5EE002DE693 /* ResponseMocker.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +121,9 @@
 				Base,
 			);
 			mainGroup = 521BA8522A1FE5EE002DE693;
+			packageReferences = (
+				521BA86D2A1FE696002DE693 /* XCRemoteSwiftPackageReference "vapor" */,
+			);
 			productRefGroup = 521BA85C2A1FE5EE002DE693 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				521BA8712A1FE6B6002DE693 /* ServerProvider.swift in Sources */,
 				521BA8612A1FE5EE002DE693 /* ContentView.swift in Sources */,
 				521BA85F2A1FE5EE002DE693 /* ResponseMockerApp.swift in Sources */,
 			);
@@ -336,6 +348,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		521BA86D2A1FE696002DE693 /* XCRemoteSwiftPackageReference "vapor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vapor/vapor.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		521BA86E2A1FE696002DE693 /* Vapor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 521BA86D2A1FE696002DE693 /* XCRemoteSwiftPackageReference "vapor" */;
+			productName = Vapor;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 521BA8532A1FE5EE002DE693 /* Project object */;
 }
