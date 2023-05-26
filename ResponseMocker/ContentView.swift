@@ -12,19 +12,41 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text(serverProvider.isRunning ? "Running" : "Not running")
-            Button("Reboot") {
-                Task {
-                    await serverProvider.reboot()
+            List {
+                ForEach(serverProvider.mockeries.indices, id: \.self) { index in
+                    MockInput(index: index)
+                        .padding()
                 }
             }
         }
         .padding()
         .onAppear {
             serverProvider.start()
+        }
+        .toolbar {
+            ToolbarItem {
+                HStack {
+                    Text("Status")
+                    Circle()
+                        .foregroundColor(serverProvider.isRunning ? Color.green : Color.red)
+                }
+            }
+            ToolbarItem {
+                Button("Reboot") {
+                    Task {
+                        await serverProvider.reboot()
+                    }
+                }
+            }
+            ToolbarItem {
+                Button(action: {
+                    Task {
+                        await serverProvider.addMock()
+                    }
+                }) {
+                    Image(systemName: "plus")
+                }
+            }
         }
     }
 }

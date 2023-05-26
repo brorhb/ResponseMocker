@@ -13,6 +13,11 @@
 		521BA8662A1FE5F0002DE693 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 521BA8652A1FE5F0002DE693 /* Preview Assets.xcassets */; };
 		521BA8712A1FE6B6002DE693 /* ServerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521BA8702A1FE6B6002DE693 /* ServerProvider.swift */; };
 		521BA8742A1FEF2A002DE693 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = 521BA8732A1FEF2A002DE693 /* Swifter */; };
+		521BA8762A207FC1002DE693 /* Mockery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521BA8752A207FC1002DE693 /* Mockery.swift */; };
+		521BA87B2A20AF49002DE693 /* util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521BA87A2A20AF49002DE693 /* util.swift */; };
+		521BA87D2A20B001002DE693 /* MockInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521BA87C2A20B001002DE693 /* MockInput.swift */; };
+		523F59412A20E2AD00A6E49D /* JSONInputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F59402A20E2AD00A6E49D /* JSONInputFieldView.swift */; };
+		523F59472A20E7B200A6E49D /* CodeEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 523F59462A20E7B200A6E49D /* CodeEditor */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +28,10 @@
 		521BA8652A1FE5F0002DE693 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		521BA8672A1FE5F0002DE693 /* ResponseMocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ResponseMocker.entitlements; sourceTree = "<group>"; };
 		521BA8702A1FE6B6002DE693 /* ServerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerProvider.swift; sourceTree = "<group>"; };
+		521BA8752A207FC1002DE693 /* Mockery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mockery.swift; sourceTree = "<group>"; };
+		521BA87A2A20AF49002DE693 /* util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = util.swift; sourceTree = "<group>"; };
+		521BA87C2A20B001002DE693 /* MockInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInput.swift; sourceTree = "<group>"; };
+		523F59402A20E2AD00A6E49D /* JSONInputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONInputFieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				523F59472A20E7B200A6E49D /* CodeEditor in Frameworks */,
 				521BA8742A1FEF2A002DE693 /* Swifter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,10 +68,14 @@
 			children = (
 				521BA85E2A1FE5EE002DE693 /* ResponseMockerApp.swift */,
 				521BA8602A1FE5EE002DE693 /* ContentView.swift */,
+				521BA87C2A20B001002DE693 /* MockInput.swift */,
 				521BA8622A1FE5EF002DE693 /* Assets.xcassets */,
 				521BA8672A1FE5F0002DE693 /* ResponseMocker.entitlements */,
 				521BA8642A1FE5F0002DE693 /* Preview Content */,
 				521BA8702A1FE6B6002DE693 /* ServerProvider.swift */,
+				521BA8752A207FC1002DE693 /* Mockery.swift */,
+				521BA87A2A20AF49002DE693 /* util.swift */,
+				523F59402A20E2AD00A6E49D /* JSONInputFieldView.swift */,
 			);
 			path = ResponseMocker;
 			sourceTree = "<group>";
@@ -92,6 +106,7 @@
 			name = ResponseMocker;
 			packageProductDependencies = (
 				521BA8732A1FEF2A002DE693 /* Swifter */,
+				523F59462A20E7B200A6E49D /* CodeEditor */,
 			);
 			productName = ResponseMocker;
 			productReference = 521BA85B2A1FE5EE002DE693 /* ResponseMocker.app */;
@@ -123,6 +138,7 @@
 			mainGroup = 521BA8522A1FE5EE002DE693;
 			packageReferences = (
 				521BA8722A1FEF2A002DE693 /* XCRemoteSwiftPackageReference "swifter" */,
+				523F59452A20E7B200A6E49D /* XCRemoteSwiftPackageReference "CodeEditor" */,
 			);
 			productRefGroup = 521BA85C2A1FE5EE002DE693 /* Products */;
 			projectDirPath = "";
@@ -150,8 +166,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				521BA87D2A20B001002DE693 /* MockInput.swift in Sources */,
 				521BA8712A1FE6B6002DE693 /* ServerProvider.swift in Sources */,
 				521BA8612A1FE5EE002DE693 /* ContentView.swift in Sources */,
+				521BA8762A207FC1002DE693 /* Mockery.swift in Sources */,
+				521BA87B2A20AF49002DE693 /* util.swift in Sources */,
+				523F59412A20E2AD00A6E49D /* JSONInputFieldView.swift in Sources */,
 				521BA85F2A1FE5EE002DE693 /* ResponseMockerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +378,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		523F59452A20E7B200A6E49D /* XCRemoteSwiftPackageReference "CodeEditor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ZeeZide/CodeEditor.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -365,6 +393,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 521BA8722A1FEF2A002DE693 /* XCRemoteSwiftPackageReference "swifter" */;
 			productName = Swifter;
+		};
+		523F59462A20E7B200A6E49D /* CodeEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 523F59452A20E7B200A6E49D /* XCRemoteSwiftPackageReference "CodeEditor" */;
+			productName = CodeEditor;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
