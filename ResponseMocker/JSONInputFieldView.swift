@@ -19,10 +19,8 @@ struct JSONInputFieldView: View {
                 language: .json,
                 indentStyle: .softTab(width: 2)
             )
-            /*TextEditor(text: $jsonString)
-                .font(Font.system(.body, design: .monospaced))
-                .disableAutocorrection(true)*/
                 .frame(height: 100)
+                .border(.black)
                 .onChange(of: jsonString) { value in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         isJSONValid = validateJSON(input: value)

@@ -9,45 +9,59 @@ import Foundation
 import Swifter
 
 class ServerProvider: ObservableObject {
-    @Published var isRunning = false
+    @Published var isRunning: Bool = false
     @Published var mockeries: [Mockery] = []
     
     private var server: HttpServer?
+    private let fileName = "mockeries.json"
+    
+    init() {
+        self.mockeries = self.fetchMockeries()
+    }
 
-    func start() {
-        DispatchQueue.global(qos: .background).async {
-            do {
-                self.server = HttpServer()
-                try self.configure(self.server!)
-                try self.server!.start()
-
-                DispatchQueue.main.async {
-                    self.isRunning = true
-                }
-            } catch {
-                print(error.localizedDescription)
-                DispatchQueue.main.async {
-                    self.isRunning = false
+    func start() async -> Bool {
+        return await withCheckedContinuation { continuation in
+            DispatchQueue.global(qos: .background).async {
+                do {
+                    self.server = HttpServer()
+                    try self.configure(self.server!)
+                    try self.server!.start()
+                    
+                    continuation.resume(with: .success(true))
+                    DispatchQueue.main.async {
+                        self.isRunning = true
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                    continuation.resume(with: .success(true))
+                    DispatchQueue.main.async {
+                        self.isRunning = false
+                    }
                 }
             }
         }
     }
 
-    func stop() {
-        DispatchQueue.global(qos: .background).async {
-            if (self.isRunning) {
-                self.server?.stop()
-                DispatchQueue.main.async {
-                    self.isRunning = false
+    func stop() async -> Bool {
+        return await withCheckedContinuation { continuation in
+            DispatchQueue.global(qos: .background).async {
+                if (self.isRunning) {
+                    self.server?.stop()
+                    continuation.resume(with: .success(true))
+                    DispatchQueue.main.async {
+                        self.isRunning = false
+                    }
+                } else {
+                    continuation.resume(with: .success(false))
                 }
             }
         }
     }
     
     func reboot() async {
-        stop()
-        try? await Task.sleep(for: .seconds(2))
-        start()
+        saveMockeries(mockeries)
+        let _ = await stop()
+        let _ = await start()
     }
 
     private func configure(_ server: HttpServer) throws {
@@ -71,12 +85,51 @@ class ServerProvider: ObservableObject {
 
     }
     
-    func addMock() async {
+    func addMock() async -> Bool {
+        let _ = await self.stop()
         DispatchQueue.main.async {
-            if (self.isRunning) {
-                self.stop()
-            }
             self.mockeries.append(Mockery())
+            self.saveMockeries(self.mockeries)
         }
+        let _ = await self.start()
+        return true
+    }
+    
+    func removeMock(at index: IndexSet) async -> Bool {
+        let _ = await self.stop()
+        DispatchQueue.main.async {
+            self.mockeries.remove(atOffsets: index)
+            self.saveMockeries(self.mockeries)
+        }
+        let _ = await self.start()
+        return true
+    }
+    
+    private func saveMockeries(_ mockeries: [Mockery]) {
+        let encoder = JSONEncoder()
+        do {
+            let jsonData = try encoder.encode(mockeries)
+            if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                let fileURL = documentsDirectory.appendingPathComponent(fileName)
+                try jsonData.write(to: fileURL)
+            }
+        } catch {
+            print("Failed to save mockeries: \(error)")
+        }
+    }
+    
+    private func fetchMockeries() -> [Mockery] {
+        if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = documentsDirectory.appendingPathComponent(fileName)
+            do {
+                let jsonData = try Data(contentsOf: fileURL)
+                let decoder = JSONDecoder()
+                let mockeries = try decoder.decode([Mockery].self, from: jsonData)
+                return mockeries
+            } catch {
+                print("Failed to fetch mockeries: \(error)")
+            }
+        }
+        return []
     }
 }

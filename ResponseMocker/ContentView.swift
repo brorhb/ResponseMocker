@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var serverProvider: ServerProvider
+    @State private var addingMockery = false
     
     var body: some View {
         VStack {
@@ -17,11 +18,20 @@ struct ContentView: View {
                     MockInput(index: index)
                         .padding()
                 }
+                .onDelete(perform: { index in
+                    Task {
+                        addingMockery = true
+                        let _ = await serverProvider.removeMock(at: index)
+                        addingMockery = false
+                    }
+                })
             }
         }
         .padding()
         .onAppear {
-            serverProvider.start()
+            Task {
+                let _ = await serverProvider.start()
+            }
         }
         .toolbar {
             ToolbarItem {
@@ -32,7 +42,7 @@ struct ContentView: View {
                 }
             }
             ToolbarItem {
-                Button("Reboot") {
+                Button("Update") {
                     Task {
                         await serverProvider.reboot()
                     }
@@ -41,11 +51,14 @@ struct ContentView: View {
             ToolbarItem {
                 Button(action: {
                     Task {
-                        await serverProvider.addMock()
+                        addingMockery = true
+                        let _ = await serverProvider.addMock()
+                        addingMockery = false
                     }
                 }) {
                     Image(systemName: "plus")
                 }
+                .disabled(addingMockery == true)
             }
         }
     }

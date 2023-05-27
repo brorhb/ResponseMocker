@@ -13,17 +13,24 @@ struct MockInput: View {
     @State private var isJsonValid = true
     
     var body: some View {
-        VStack {
-            Form {
-                HStack {
-                    TextField("Endpoint", text: $serverProvider.mockeries[index].endpoint)
-                        .font(.system(.body, design: .monospaced))
-                    Spacer()
-                    TextField("Statuscode", text: $serverProvider.mockeries[index].statusCode)
-                        .font(.system(.body, design: .monospaced))
+        if (serverProvider.mockeries.count - 1 >= index) {
+            VStack {
+                Form {
+                    HStack {
+                        TextField("Endpoint", text: $serverProvider.mockeries[index].endpoint)
+                            .font(.system(.body, design: .monospaced))
+                        Spacer()
+                        HStack {
+                            TextField("Statuscode", text: $serverProvider.mockeries[index].statusCode)
+                                .font(.system(.body, design: .monospaced))
+                            TextField("Status message", text: $serverProvider.mockeries[index].responseDescription)
+                        }
+                    }
                 }
+                JSONInputFieldView(jsonString: $serverProvider.mockeries[index].responseBody)
             }
-            JSONInputFieldView(jsonString: $serverProvider.mockeries[index].responseBody)
+            .padding()
+            .border(.gray)
         }
     }
 }
