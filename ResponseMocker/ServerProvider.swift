@@ -67,17 +67,14 @@ class ServerProvider: ObservableObject {
     private func configure(_ server: HttpServer) throws {
 
         for mockery in mockeries {
-
-            if let statusCode = Int(mockery.statusCode) {
-                server[mockery.endpoint] = { request in
-                    return HttpResponse.raw(
-                        statusCode,
-                        mockery.responseDescription,
-                        ["Content-Type": "application/json"]
-                    ) { writer in
-                        let body = mockery.responseBody
-                        try writer.write(Array(body.utf8))
-                    }
+            server[mockery.endpoint] = { request in
+                return HttpResponse.raw(
+                    mockery.statusCode.rawValue,
+                    "",
+                    ["Content-Type": "application/json"]
+                ) { writer in
+                    let body = mockery.responseBody
+                    try writer.write(Array(body.utf8))
                 }
             }
 

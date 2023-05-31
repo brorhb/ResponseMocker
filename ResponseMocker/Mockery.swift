@@ -7,10 +7,16 @@
 
 import Foundation
 
-struct Mockery: Identifiable, Codable {
+struct Mockery: Identifiable, Codable, Equatable {
     var id = UUID()
-    var statusCode = "200"
+    var statusCode: HTTPStatusCode = .ok
     var endpoint = "*"
-    var responseDescription = "OK"
     var responseBody = ""
+    
+    static func ==(lhs: Mockery, rhs: Mockery) -> Bool {
+        return lhs.id == rhs.id &&
+               lhs.statusCode == rhs.statusCode &&
+               lhs.endpoint == rhs.endpoint &&
+               lhs.responseBody == rhs.responseBody
+    }
 }

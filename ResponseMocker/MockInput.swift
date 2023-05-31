@@ -6,11 +6,23 @@
 //
 
 import SwiftUI
+import Combine
 
 struct MockInput: View {
     var index: Int
     @EnvironmentObject var serverProvider: ServerProvider
     @State private var isJsonValid = true
+    @State private var cancellable: Timer?
+    
+    func updateWithDebounce () {
+        cancellable?.invalidate()
+        
+        cancellable = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+            Task {
+                await serverProvider.reboot()
+            }
+        }
+    }
     
     var body: some View {
         if (serverProvider.mockeries.count - 1 >= index) {
@@ -20,14 +32,17 @@ struct MockInput: View {
                         TextField("Endpoint", text: $serverProvider.mockeries[index].endpoint)
                             .font(.system(.body, design: .monospaced))
                         Spacer()
-                        HStack {
-                            TextField("Statuscode", text: $serverProvider.mockeries[index].statusCode)
-                                .font(.system(.body, design: .monospaced))
-                            TextField("Status message", text: $serverProvider.mockeries[index].responseDescription)
+                        Picker("Status Code", selection: $serverProvider.mockeries[index].statusCode) {
+                            ForEach(HTTPStatusCode.allCases, id: \.self) { statusCode in
+                                Text("\(statusCode.rawValue)")
+                            }
                         }
                     }
                 }
                 JSONInputFieldView(jsonString: $serverProvider.mockeries[index].responseBody)
+            }
+            .onChange(of: serverProvider.mockeries[index]) { _ in
+                updateWithDebounce()
             }
             .padding()
             .border(.gray)
