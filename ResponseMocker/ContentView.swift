@@ -17,6 +17,15 @@ struct ContentView: View {
                 ForEach(serverProvider.mockeries.indices, id: \.self) { index in
                     MockInput(index: index)
                         .padding()
+                        .contextMenu {
+                            Button("Delete") {
+                                Task {
+                                    addingMockery = true
+                                    let _ = await serverProvider.removeMock(at: IndexSet(integer: index))
+                                    addingMockery = false
+                                }
+                            }
+                        }
                 }
                 .onDelete(perform: { index in
                     Task {
@@ -27,7 +36,7 @@ struct ContentView: View {
                 })
             }
         }
-        .padding()
+        .background()
         .onAppear {
             Task {
                 let _ = await serverProvider.start()
@@ -36,7 +45,6 @@ struct ContentView: View {
         .toolbar {
             ToolbarItem {
                 HStack {
-                    Text("Status")
                     Circle()
                         .foregroundColor(serverProvider.isRunning ? Color.green : Color.red)
                 }

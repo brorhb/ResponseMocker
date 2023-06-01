@@ -7,10 +7,13 @@
 
 import Foundation
 import Swifter
+import SwiftUI
 
 class ServerProvider: ObservableObject {
     @Published var isRunning: Bool = false
     @Published var mockeries: [Mockery] = []
+    
+    @AppStorage("port") var port: Int = 8080
     
     private var server: HttpServer?
     private let fileName = "mockeries.json"

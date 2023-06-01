@@ -40,12 +40,20 @@ struct MockInput: View {
                     }
                 }
                 JSONInputFieldView(jsonString: $serverProvider.mockeries[index].responseBody)
+                HStack {
+                    Link(
+                        "http://localhost:\(String(serverProvider.port))/\(serverProvider.mockeries[index].endpoint)",
+                        destination: URL(string: "http://localhost:\(String(serverProvider.port))/\(serverProvider.mockeries[index].endpoint)")!
+                    )
+                    Spacer()
+                }
             }
             .onChange(of: serverProvider.mockeries[index]) { _ in
                 updateWithDebounce()
             }
             .padding()
-            .border(.gray)
+            .background(.ultraThickMaterial)
+            .cornerRadius(8)
         }
     }
 }

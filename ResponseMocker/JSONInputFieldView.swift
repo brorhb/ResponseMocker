@@ -27,11 +27,13 @@ struct JSONInputFieldView: View {
                     }
                 }
             
-            HStack {
-                Text(isJSONValid ? "" : "Invalid JSON")
-                    .foregroundColor(isJSONValid ? .green : .red)
-                    .padding(.top)
-                Spacer()
+            if isJSONValid == false {
+                HStack {
+                    Text("Invalid JSON")
+                        .foregroundColor(isJSONValid ? .green : .red)
+                        .bold()
+                    Spacer()
+                }
             }
         }
     }
